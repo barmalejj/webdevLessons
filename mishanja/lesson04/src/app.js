@@ -17,9 +17,6 @@ function loadJN(path, success, error)
             }
         }
     };
-    if (poo) {
-        poo(console.log("poo poo"));
-    } else {console.log("doo doo")}
     httreq.open("GET", path, true);
     httreq.send();
 }
