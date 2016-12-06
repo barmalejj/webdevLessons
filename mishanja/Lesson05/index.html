@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>WebApp</title>
+  <meta charset="UTF-8">
+  <title>WebApp</title>
 </head>
 <body>
 <header>
 
-    <h1>Mikes WebApp</h1>
+  <h1>Mikes WebApp</h1>
 
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+    <tbody id="dynamic"></tbody>
+  </table>
+
+  <script>
+  var container = document.getElementById('dynamic');
+
+  loadJSON('/data', function (data) {
+      for (var i = 0; i < 3; i++) {
+          container.innerHTML += "<tr>";
+          container.innerHTML += "<tr>"+"<td>"+data[i].name+"</td>"+"<td>"+data[i].message+"</td>"+"</tr>";
+          container.innerHTML += "</tr>";
+      }
+  }, function(data1) {console.error(data1); } );
+
+  function loadJSON(path, success, error)
+  {
+      var httreq = new XMLHttpRequest();
+      httreq.onreadystatechange = function()
+      {
+          if (httreq.readyState === XMLHttpRequest.DONE) {
+              if (httreq.status === 200) {
+                  if (success)
+                      success(JSON.parse(httreq.responseText));
+                  console.log(success);
+              } else {
+                  if (error)
+                      error("Status error");
+              }
+          }
+      };
+      httreq.open("GET", path, true);
+      httreq.send();
+  }
+  </script>
 </header>
 </body>
 </html>

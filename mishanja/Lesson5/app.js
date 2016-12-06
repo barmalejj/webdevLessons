@@ -18,9 +18,9 @@ const server = http.createServer((req, res) => {
             res.statusCode = 200;
 
             res.setHeader('Content-Type', 'application/json');
-        res.end(data);
+            res.end(data);
         });
-    } else {
+    } else if (parcedUrl.pathname === '/') {
         fs.readFile('index.html', function (err, html) {
             if (err) {
                 throw err;
@@ -28,7 +28,9 @@ const server = http.createServer((req, res) => {
         res.statusCode = 200;
         res.end(html);
         });
-
+    } else {
+      res.statusCode = 404;
+      res.end('Page not found');
     }
 });
 

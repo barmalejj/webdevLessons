@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
     if (req.url === '/data'){
             res.statusCode = 200;
 
-            fs.readFile('data/index.html', 'utf8', function (err, html) {
+            fs.readFile('data/data.json', 'utf8', function (err, html) {
                 if (err) throw err;
 
                 res.writeHead(200, {'Content-Type': 'text/html'});
