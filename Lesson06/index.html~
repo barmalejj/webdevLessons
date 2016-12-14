@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebApp</title>
+</head>
+<body>
+<header>
+
+    <h1>Mikes WebApp</h1>
+    <table border>
+      <tr>
+        <th>Name</th>
+        <th>Message</th>
+      </tr>
+      <tbody id="dynamic"></tbody>
+    </table>
+  <script>
+  loadJson('/data', data => handleData(data), error => console.log(error));
+
+  function handleData(data) {
+    const container = document.getElementById('dynamic');
+    let tbody = '';
+    data.forEach(person => {
+      const {name, message} = person;
+      tbody += `<tr>
+                  <td>${name}</td>
+                  <td>${message}</td>
+                </tr>`;
+    });
+    container.innerHTML = tbody;
+  }
+
+  function loadJson(path, success, error) {
+      var httreq = new XMLHttpRequest();
+      httreq.onreadystatechange = function()
+      {
+          if (httreq.readyState === XMLHttpRequest.DONE) {
+              if (httreq.status === 200) {
+                  if (success)
+                      success(JSON.parse(httreq.responseText));
+                  console.log(success);
+                  } else {
+                  if (error)
+                      error("Status error");
+              }
+          }
+      };
+      httreq.open("GET", path, true);
+      httreq.send();
+  }
+  </script>
+</header>
+</body>
+</html>
