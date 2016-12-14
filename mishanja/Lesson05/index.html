@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WebApp</title>
+    <meta charset="UTF-8">
+    <title>WebApp</title>
 </head>
 <body>
 <header>
 
-  <h1>Mikes WebApp</h1>
-
-  <table>
-    <tr>
-      <th></th>
-      <th></th>
-    </tr>
-    <tbody id="dynamic"></tbody>
-  </table>
-
+    <h1>Mikes WebApp</h1>
+    <table border>
+      <tr>
+        <th>Name</th>
+        <th>Message</th>
+      </tr>
+      <tbody id="dynamic"></tbody>
+    </table>
   <script>
-  var container = document.getElementById('dynamic');
+  loadJson('/data', data => handleData(data), error => console.log(error));
 
-  loadJSON('/data', function (data) {
-      for (var i = 0; i < 3; i++) {
-          container.innerHTML += "<tr>";
-          container.innerHTML += "<tr>"+"<td>"+data[i].name+"</td>"+"<td>"+data[i].message+"</td>"+"</tr>";
-          container.innerHTML += "</tr>";
-      }
-  }, function(data1) {console.error(data1); } );
+  function handleData(data) {
+    const container = document.getElementById('dynamic');
+    let tbody = '';
+    data.forEach(person => {
+      const {name, message} = person;
+      tbody += `<tr>
+                  <td>${name}</td>
+                  <td>${message}</td>
+                </tr>`;
+    });
+    container.innerHTML = tbody;
+  }
 
-  function loadJSON(path, success, error)
-  {
+  function loadJson(path, success, error) {
       var httreq = new XMLHttpRequest();
       httreq.onreadystatechange = function()
       {
@@ -38,7 +40,7 @@
                   if (success)
                       success(JSON.parse(httreq.responseText));
                   console.log(success);
-              } else {
+                  } else {
                   if (error)
                       error("Status error");
               }

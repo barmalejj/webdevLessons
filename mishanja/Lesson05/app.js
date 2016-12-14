@@ -9,16 +9,18 @@ const port = 8080;
 const server = http.createServer((req, res) => {
     console.log( req.method, req.url);
 
-    if (req.url === '/data'){
+    var parcedUrl = url.parse(req.url, true);
+    console.log(parcedUrl);
+    if (parcedUrl.pathname === '/data'){
+
+        fs.readFile('./data.json', 'utf8', function (err, data) {
+            if (err) throw err;
             res.statusCode = 200;
 
-            fs.readFile('data/data.json', 'utf8', function (err, html) {
-                if (err) throw err;
-
-                res.writeHead(200, {'Content-Type': 'text/html'});
-                res.end(html);
-                });
-    } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(data);
+        });
+    } else if (parcedUrl.pathname === '/') {
         fs.readFile('index.html', function (err, html) {
             if (err) {
                 throw err;
@@ -26,7 +28,9 @@ const server = http.createServer((req, res) => {
         res.statusCode = 200;
         res.end(html);
         });
-
+    } else {
+      res.statusCode = 404;
+      res.end('Page not found');
     }
 });
 
