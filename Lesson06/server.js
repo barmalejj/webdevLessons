@@ -15,4 +15,4 @@ app.get('/data', function (req, res) {
         res.end(data);
     });})
 
-    app.listen(8080)
+    app.listen(3030)
