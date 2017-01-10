@@ -6,7 +6,8 @@ function AppController(FindService) {
   vm.keywords = ''
   vm.data = undefined
   vm.search = search
-  vm.SelectedQuantity = 0
+  vm.quantity = [5, 10, 25, 50];
+  vm.selectedQuantity = vm.quantity[0];
 
   function search() {
     const {keywords} = vm
@@ -18,10 +19,4 @@ function AppController(FindService) {
       .catch(e => console.log(e))
       .finally(() => console.log('search tirggered'))
   }
-}
-
-angular.module('app').controller('MyCtrl',MyCtrl)
-
-function MyCtrl($scope){
-  $scope.quantity = [5, 10, 25, 50];
 }

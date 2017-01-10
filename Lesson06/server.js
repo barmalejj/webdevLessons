@@ -33,7 +33,7 @@ function serchOneBay(props, next) {
     '&SECURITY-APPNAME=MikeDeni-FishRule-PRD-145f6444c-44029cba' +
     '&RESPONSE-DATA-FORMAT=JSON' +
     `&REST-PAYLOAD&keywords=${keywords}` +
-    `&paginationInput.entriesPerPage=${}`
+    `&paginationInput.entriesPerPage=${5}`
 
   const callback = (response) => {
     var str = ''

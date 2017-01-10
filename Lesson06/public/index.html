@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <meta charset="UTF-8">
-    <script src="vendor/jquery/dist/jquery.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/eBay/00-module.js"></script>
-    <script src="js/eBay/FindService.js"></script>
-    <script src="js/model/Person.js"></script>
-    <script src="js/model/PersonList.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/AppController.js"></script>
-    <title>WebApp</title>
+  <meta charset="UTF-8">
+  <script src="vendor/jquery/dist/jquery.js"></script>
+  <script src="vendor/angular/angular.min.js"></script>
+  <script src="js/eBay/00-module.js"></script>
+  <script src="js/eBay/FindService.js"></script>
+  <script src="js/model/Person.js"></script>
+  <script src="js/model/PersonList.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/AppController.js"></script>
+  <title>WebApp</title>
 </head>
 <body ng-controller="AppController as app">
-<header>
+  <header>
     <h1>Mikes WebApp</h1>
     <table border>
-        <tr>
-            <th>Name</th>
-            <th>Message</th>
-        </tr>
-        <tbody id="dynamic"></tbody>
+      <tr>
+        <th>Name</th>
+        <th>Message</th>
+      </tr>
+      <tbody id="dynamic"></tbody>
     </table>
-</header>
-<input type="text" ng-model="app.keywords" value="">
+  </header>
+  <input type="text" ng-model="app.keywords" value="">
 
-<div ng-controller="MyCtrl">
-<select ng-model="app.SelectedQuantity" ng-options="item for item in quantity">
-</select>
-</div>
+  <select
+    ng-model="app.selectedQuantity"
+    ng-options="item for item in app.quantity"
+  />
 
-<button ng-click="app.search()">Submit</button>
+  <button ng-click="app.search()">Submit</button>
   <div ng-repeat="item in app.data.data.findItemsByKeywordsResponse[0].searchResult[0].item">
     <table border="">
       <tr>
         <th><img src="{{item.galleryURL[0]}}" alt="name" style="width:100px;height:100px;"></th>
-    <th>{{item.title[0]}} {{item.country[0]}}</th>
-  </tr>
-</table>
+        <th>{{item.title[0]}} {{item.country[0]}}</th>
+      </tr>
+    </table>
   </div>
 </body>
 </html>
