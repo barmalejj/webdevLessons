@@ -2,8 +2,8 @@
 <html ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <script src="js/angular.min.js"></script>
     <script src="vendor/jquery/dist/jquery.js"></script>
+    <script src="js/angular.min.js"></script>
     <script src="js/eBay/00-module.js"></script>
     <script src="js/eBay/FindService.js"></script>
     <script src="js/model/Person.js"></script>
@@ -24,16 +24,20 @@
     </table>
 </header>
 <input type="text" ng-model="app.keywords" value="">
+
+<div ng-controller="MyCtrl">
+<select ng-model="app.SelectedQuantity" ng-options="item for item in quantity">
+</select>
+</div>
+
 <button ng-click="app.search()">Submit</button>
-<ul>
   <div ng-repeat="item in app.data.data.findItemsByKeywordsResponse[0].searchResult[0].item">
     <table border="">
       <tr>
-        <th><img src="{{item.galleryURL[0]}}" alt="Mountain View" style="width:100px;height:100px;"></th>
+        <th><img src="{{item.galleryURL[0]}}" alt="name" style="width:100px;height:100px;"></th>
     <th>{{item.title[0]}} {{item.country[0]}}</th>
   </tr>
 </table>
   </div>
-</ul>
 </body>
 </html>
